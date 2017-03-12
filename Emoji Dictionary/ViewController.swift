@@ -12,7 +12,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBOutlet weak var firstTableView: UITableView!
     
-    var emojis = ["👍🏻","💩","😍","🙀","😁","🤑"]
+    var emojis : [Emoji] = []
     
     
     
@@ -22,6 +22,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         firstTableView.dataSource = self
         firstTableView.delegate = self
+        emojis = makeEmojiArray()
         
     }
     
@@ -33,7 +34,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print(indexPath.row)
         let cell = UITableViewCell()
-        cell.textLabel?.text = emojis[indexPath.row]
+        let emoji = emojis[indexPath.row]
+        cell.textLabel?.text = emoji.stringEmoji
         return cell
     }
     
@@ -44,7 +46,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let defVC = segue.destination as! DefinitionViewController
-        defVC.emoji = sender as! String
+        defVC.emoji = sender as! Emoji
         
     }
     
@@ -53,6 +55,46 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func makeEmojiArray() -> [Emoji] {
+        let emoji1 = Emoji()
+        emoji1.stringEmoji = "👍🏻"
+        emoji1.birthYear = 2006
+        emoji1.category = "Hand Gesture"
+        emoji1.definition = "Thumbs Up"
+        
+        let emoji2 = Emoji()
+        emoji2.stringEmoji = "💩"
+        emoji2.birthYear = 2012
+        emoji2.category = "Smiley"
+        emoji2.definition = "Poop"
+        
+        let emoji3 = Emoji()
+        emoji3.stringEmoji = "🤑"
+        emoji3.birthYear = 2005
+        emoji3.category = "Smiley"
+        emoji3.definition = "Money Tongue"
+
+        let emoji4 = Emoji()
+        emoji4.stringEmoji = "🙀"
+        emoji4.birthYear = 2004
+        emoji4.category = "Animal"
+        emoji4.definition = "Shocked Cat"
+        
+        let emoji5 = Emoji()
+        emoji5.stringEmoji = "😍"
+        emoji5.birthYear = 2011
+        emoji5.category = "Smiley"
+        emoji5.definition = "Heart Eyes"
+        
+        let emoji6 = Emoji()
+        emoji6.stringEmoji = "😁"
+        emoji6.birthYear = 2016
+        emoji6.category = "Smiley"
+        emoji6.definition = "Smiley Face"
+        
+        return [emoji1, emoji2, emoji3, emoji4, emoji5, emoji6]
     }
 
 
